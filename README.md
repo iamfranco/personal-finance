@@ -25,7 +25,7 @@ npm install
 
 To run the app locally:
 ```
-npm run start
+npm run dev
 ```
 
 To deploy the app to GitHub Pages:
