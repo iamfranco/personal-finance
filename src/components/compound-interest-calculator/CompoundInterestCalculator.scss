@@ -1,0 +1,42 @@
+.compound-interest-container {
+  max-width: 375px;
+  margin: 30px auto;
+}
+
+.input-row {
+  margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+
+  .input-number {
+    margin-left: auto;
+  }
+}
+
+.total-container {
+  margin-top: 40px;
+}
+
+.total-row {
+  display: flex;
+  font-size: 16px;
+  margin-bottom: 5px;
+
+  .currency {
+    margin-left: auto;
+    font-family: 'Courier Prime', monospace;
+  }
+
+  &.total-compound {
+    color: #FF9130;
+
+    .currency {
+      font-weight: bold;
+    }
+  }
+
+  &.total-contribution {
+    color: #1D70B8;
+  }
+}

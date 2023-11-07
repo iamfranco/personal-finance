@@ -1,9 +1,10 @@
-import './App.css'
+import './App.scss'
+import CompoundInterestCalculator from './components/compound-interest-calculator/CompoundInterestCalculator';
 
 function App() {
   return (
     <>
-      Personal Finance
+      <CompoundInterestCalculator />
     </>
   )
 }
