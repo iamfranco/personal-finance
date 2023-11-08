@@ -11,7 +11,7 @@ export default defineConfig({
       includeAssets: ['favicon.ico', 'apple-touch-icon.png', 'mask-icon.svg'],
       manifest: {
         name: 'Personal Finance App',
-        short_name: 'PersonalFinance',
+        short_name: 'Personal Finance',
         description: 'A personal finance app for calculating compound interest',
         theme_color: '#ffffff',
         icons: [

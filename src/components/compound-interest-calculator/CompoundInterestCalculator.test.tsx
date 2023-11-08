@@ -6,6 +6,18 @@ import { InputLabel } from "../../models/InputLabel";
 import { calculationService } from "../../services/calculation-service/calculationService";
 import { RegularPayInPeriod } from "../../models/RegularPayInPeriod";
 import { CompoundInterestParams } from "../../models/CompoundInterestParams";
+import { numberDisplayService } from "../../services/number-display-service/numberDisplayService";
+
+const mockLineChart = vi.fn();
+vi.mock('../line-chart/LineChart', () => ({ 
+  default: (props: any) => {
+    mockLineChart(props)
+    return <div>LineChart</div>
+  }, 
+}))
+
+vi.spyOn(numberDisplayService, 'toCurrencyFormat')
+  .mockImplementation((num: number) => num.toString());
 
 const getInputByLabel = (label: string) => {
   const inputLabel = screen.getByText(label);
@@ -41,6 +53,14 @@ describe('CompoundInterestCalculator component', () => {
     inputLabels.forEach(x => {
       expect(getInputByLabel(x)).not.toBeNull();
     })
+  })
+
+  it('renders line chart', () => {
+    // Arrange Act
+    render(<CompoundInterestCalculator />);
+
+    // Assert
+    expect(mockLineChart).toHaveBeenCalled();
   })
   
   it('when all input fields populated, then correct total fields should be displayed', async () => {
