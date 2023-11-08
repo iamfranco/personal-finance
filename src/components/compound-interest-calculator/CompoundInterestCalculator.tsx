@@ -6,6 +6,8 @@ import './CompoundInterestCalculator.scss'
 import { CompoundInterestParams } from '../../models/CompoundInterestParams'
 import { calculationService } from '../../services/calculation-service/calculationService'
 import TextBox from '../text-box/TextBox'
+import LineChart from '../line-chart/LineChart'
+import { numberDisplayService } from '../../services/number-display-service/numberDisplayService'
 
 const CompoundInterestCalculator = () => {
   const compoundInterestParams: CompoundInterestParams = {
@@ -25,8 +27,11 @@ const CompoundInterestCalculator = () => {
 
   const [regularPayInPeriod, setRegularPayInPeriod] = useState(initialRegularPayInPeriod);
 
-  const [totalCompound, setTotalCompound] = useState(0);
-  const [totalContribution, setTotalContribution] = useState(0);
+  const [compounds, setCompounds] = useState<number[]>([]);
+  const [contributions, setContributions] = useState<number[]>([]);
+
+  const totalCompound = numberDisplayService.toCurrencyFormat(compounds.slice(-1)[0] ?? 0);
+  const totalContribution = numberDisplayService.toCurrencyFormat(contributions.slice(-1)[0] ?? 0);
 
   useEffect(() => {
     compoundInterestParams.principal = principal;
@@ -36,11 +41,8 @@ const CompoundInterestCalculator = () => {
 
     compoundInterestParams.regularPayInPeriod = regularPayInPeriod;
 
-    const compounds = calculationService.getCompoundInterest(compoundInterestParams);
-    const contributions = calculationService.getTotalContribution(compoundInterestParams);
-
-    setTotalCompound(compounds.slice(-1)[0]);
-    setTotalContribution(contributions.slice(-1)[0]);
+    setCompounds(() => calculationService.getCompoundInterest(compoundInterestParams));
+    setContributions(() => calculationService.getTotalContribution(compoundInterestParams));
   }, [principal, regularPayIns, duration, interestRate, regularPayInPeriod]);
 
   return (
@@ -91,6 +93,8 @@ const CompoundInterestCalculator = () => {
           </div>
         </div>
       </div>
+
+      <LineChart y1={compounds} y2={contributions} label1={''} label2={''} />
     </div>
   )
 }
