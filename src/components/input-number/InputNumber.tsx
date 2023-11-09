@@ -2,9 +2,10 @@ import './InputNumber.scss'
 
 interface Props {
   setValue: React.Dispatch<React.SetStateAction<number>>
+  value?: number,
 }
 
-const InputNumber = ({setValue}: Props) => {
+const InputNumber = ({setValue, value}: Props) => {
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const val = e.target.value;
 
@@ -20,7 +21,8 @@ const InputNumber = ({setValue}: Props) => {
       onChange={handleChange} 
       placeholder='0'
       type='number'
-      className='input-number'/>
+      className='input-number'
+      value={value}/>
   )
 }
 

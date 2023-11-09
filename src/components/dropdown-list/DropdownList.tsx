@@ -16,9 +16,14 @@ function DropdownList<T extends RegularPayInPeriod> ({currentValue, possibleValu
   const options = possibleValues.map(value => 
     <option value={value} key={value}>{value}</option>
   );
+
+  const handleChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    const newValue = e.currentTarget.value as T;
+    setValue(newValue);
+  }
   
   return (
-    <select className='dropdown-list' defaultValue={currentValue}>
+    <select className='dropdown-list' defaultValue={currentValue} onChange={handleChange}>
       {options}
     </select>
   )

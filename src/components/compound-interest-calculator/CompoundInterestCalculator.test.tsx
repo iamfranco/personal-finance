@@ -67,11 +67,11 @@ describe('CompoundInterestCalculator component', () => {
     // Arrange
     render(<CompoundInterestCalculator />);
     const compoundInterestParams: CompoundInterestParams = {
-      principal: 1000,
-      regularPayIns: 750,
-      regularPayInPeriod: RegularPayInPeriod.Monthly,
-      duration: 40,
-      interestRate: 7.5,
+      principal: 100,
+      regularPayIns: 70,
+      regularPayInPeriod: RegularPayInPeriod.BiWeekly,
+      duration: 4,
+      interestRate: 5.5,
     }
 
     const compoundTotal = 1234567;
@@ -83,9 +83,18 @@ describe('CompoundInterestCalculator component', () => {
       .mockReturnValue([0, 0, flatTotal]);
 
     // Act
+    for (var i=0; i<5; i++) {
+      await user.type(getInputByLabel(InputLabel.Principal), '{backspace}');
+      await user.type(getInputByLabel(InputLabel.RegularPayIns), '{backspace}');
+      await user.type(getInputByLabel(InputLabel.Duration), '{backspace}');
+      await user.type(getInputByLabel(InputLabel.InterestRate), '{backspace}');
+    }
     await user.type(getInputByLabel(InputLabel.Principal), compoundInterestParams.principal.toString());
     await user.type(getInputByLabel(InputLabel.RegularPayIns), compoundInterestParams.regularPayIns.toString());
-    await user.click(getDropdownByOption(compoundInterestParams.regularPayInPeriod));
+
+    const dropdown = screen.getByRole<HTMLInputElement>('combobox');
+    await user.selectOptions(dropdown, getDropdownByOption(compoundInterestParams.regularPayInPeriod));
+
     await user.type(getInputByLabel(InputLabel.Duration), compoundInterestParams.duration.toString());
     await user.type(getInputByLabel(InputLabel.InterestRate), compoundInterestParams.interestRate.toString());
 

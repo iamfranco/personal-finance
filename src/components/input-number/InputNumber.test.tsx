@@ -53,4 +53,16 @@ describe('InputNumber component', () => {
     expect(mockSetValue).toHaveBeenCalledWith(1);
     expect(mockSetValue).toHaveBeenCalledWith(0);
   })
+
+  it('when renders with initialValue, then input value equals initialValue ', () => {
+    // Arrange
+    const initialValue = 321;
+    
+    // Act
+    render(<InputNumber setValue={mockSetValue} value={initialValue}/>)
+    
+    // Assert
+    const input = screen.getByRole<HTMLInputElement>('spinbutton');
+    expect(input.value).toBe(initialValue.toString());
+  })
 })
