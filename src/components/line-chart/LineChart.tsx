@@ -12,12 +12,10 @@ ChartJS.register(
 
 interface Props {
   y1: number[],
-  y2: number[],
-  label1: string,
-  label2: string
+  y2: number[]
 }
 
-const LineChart = ({y1, y2, label1, label2}: Props) => {
+const LineChart = ({y1, y2}: Props) => {
 
   const x = y1.map((_, i) => i);
 
@@ -25,7 +23,6 @@ const LineChart = ({y1, y2, label1, label2}: Props) => {
     labels: x,
     datasets: [
       {
-        label: label1,
         data: y1,
         borderColor: '#FF9130',
         backgroundColor: '#FF913099',
@@ -33,7 +30,6 @@ const LineChart = ({y1, y2, label1, label2}: Props) => {
         pointRadius: 2,
       },
       {
-        label: label2,
         data: y2,
         borderColor: '#1D70B8',
         backgroundColor: '#1D70B899',

@@ -104,7 +104,7 @@ const CompoundInterestCalculator = () => {
       </div>
 
       <div className='line-chart-container'>
-        <LineChart y1={compounds} y2={contributions} label1={''} label2={''} />
+        <LineChart y1={compounds} y2={contributions} />
       </div>
     </div>
   )
