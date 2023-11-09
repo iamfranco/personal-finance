@@ -49,28 +49,35 @@ const CompoundInterestCalculator = () => {
     <div className='compound-interest-container'>
       <h1>Compound Interest Calculator</h1>
       
-      <div className='input-row'>
-        <span className='input-label'>Initial Investment</span>
-        <InputNumber setValue={setPrincipal}/>
-        <TextBox />
-      </div>
-      <div className='input-row'>
-        <span className='input-label'>Periodic Contribution</span>
-        <InputNumber setValue={setRegularPayIns}/>
-        <DropdownList 
-          currentValue={initialRegularPayInPeriod}
-          possibleValues={Object.values(RegularPayInPeriod)} 
-          setValue={setRegularPayInPeriod} />
-      </div>
-      <div className='input-row'>
-        <span className='input-label'>Length of Time</span>
-        <InputNumber setValue={setDuration}/>
-        <TextBox text='Years' />
-      </div>
-      <div className='input-row'>
-        <span className='input-label'>Interest Rate</span>
-        <InputNumber setValue={setInterestRate}/>
-        <TextBox text='% (AER)' />
+      <div className='row-group-container'>
+        <div className='row-group'>
+          <div className='input-row'>
+            <span className='input-label'>Initial Investment</span>
+            <InputNumber setValue={setPrincipal}/>
+            <TextBox />
+          </div>
+          <div className='input-row'>
+            <span className='input-label'>Periodic Contribution</span>
+            <InputNumber setValue={setRegularPayIns}/>
+            <DropdownList 
+              currentValue={initialRegularPayInPeriod}
+              possibleValues={Object.values(RegularPayInPeriod)} 
+              setValue={setRegularPayInPeriod} />
+          </div>
+        </div>
+
+        <div className='row-group'>
+          <div className='input-row'>
+            <span className='input-label'>Length of Time</span>
+            <InputNumber setValue={setDuration}/>
+            <TextBox text='Years' />
+          </div>
+          <div className='input-row'>
+            <span className='input-label'>Interest Rate</span>
+            <InputNumber setValue={setInterestRate}/>
+            <TextBox text='% (AER)' />
+          </div>
+        </div>
       </div>
 
       <div className='total-container'>
