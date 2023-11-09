@@ -4,14 +4,20 @@
 $row-group-width: 350px;
 $input-gap: 10px;
 $non-chart-height: 500px;
+$non-chart-height-tablet: 400px;
 $non-chart-height-desktop: 300px;
 
 .compound-interest-container {
-  margin: 30px auto;
   padding: 0 10px;
+  max-width: 1000px;
+  margin: 0 auto;
+
+  @media (min-width: breakpoint.$desktop) {
+    padding-top: 18px;
+  }
 
   .row-group-container {
-    @media (min-width: breakpoint.$desktop) {
+    @media (min-width: breakpoint.$tablet) {
       display: flex;
       justify-content: space-between;
 
@@ -26,6 +32,10 @@ $non-chart-height-desktop: 300px;
 
     @media (min-width: breakpoint.$desktop) {
       height: calc(100vh - $non-chart-height-desktop);
+    }
+
+    @media (min-width: breakpoint.$tablet) {
+      height: calc(100vh - $non-chart-height-tablet);
     }
   }
 }

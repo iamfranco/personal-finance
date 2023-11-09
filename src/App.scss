@@ -1,0 +1,12 @@
+@use './styles/breakpoint.scss';
+@use './components/hamburger-menu/HamburgerMenu.scss';
+
+$menu-content-gap: 20px;
+
+#app-container {
+  #app-content {
+    @media (min-width: breakpoint.$desktop) {
+      padding-left: calc(HamburgerMenu.$menu-desktop-width + $menu-content-gap);
+    }
+  }
+}
