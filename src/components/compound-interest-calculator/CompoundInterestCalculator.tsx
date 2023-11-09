@@ -8,24 +8,22 @@ import { calculationService } from '../../services/calculation-service/calculati
 import TextBox from '../text-box/TextBox'
 import LineChart from '../line-chart/LineChart'
 import { numberDisplayService } from '../../services/number-display-service/numberDisplayService'
+import { localStorageService } from '../../services/local-storage-service/localStorageService'
 
 const CompoundInterestCalculator = () => {
-  const compoundInterestParams: CompoundInterestParams = {
-    principal: 0,
-    regularPayIns: 0,
+  const initialValues = localStorageService.getItem<CompoundInterestParams>('compound-interest-calculator', {
+    principal: 1000,
+    regularPayIns: 750,
     regularPayInPeriod: RegularPayInPeriod.Monthly,
-    duration: 0,
-    interestRate: 0,
-  }
+    duration: 40,
+    interestRate: 7
+  });
 
-  const [principal, setPrincipal] = useState(0);
-  const [regularPayIns, setRegularPayIns] = useState(0);
-  const [duration, setDuration] = useState(0);
-  const [interestRate, setInterestRate] = useState(0);
-
-  const initialRegularPayInPeriod = RegularPayInPeriod.Monthly;
-
-  const [regularPayInPeriod, setRegularPayInPeriod] = useState(initialRegularPayInPeriod);
+  const [principal, setPrincipal] = useState(initialValues.principal);
+  const [regularPayIns, setRegularPayIns] = useState(initialValues.regularPayIns);
+  const [regularPayInPeriod, setRegularPayInPeriod] = useState(initialValues.regularPayInPeriod);
+  const [duration, setDuration] = useState(initialValues.duration);
+  const [interestRate, setInterestRate] = useState(initialValues.interestRate);
 
   const [compounds, setCompounds] = useState<number[]>([]);
   const [contributions, setContributions] = useState<number[]>([]);
@@ -34,15 +32,18 @@ const CompoundInterestCalculator = () => {
   const totalContribution = numberDisplayService.toCurrencyFormat(contributions.slice(-1)[0] ?? 0);
 
   useEffect(() => {
-    compoundInterestParams.principal = principal;
-    compoundInterestParams.regularPayIns = regularPayIns;
-    compoundInterestParams.duration = duration;
-    compoundInterestParams.interestRate = interestRate;
-
-    compoundInterestParams.regularPayInPeriod = regularPayInPeriod;
+    const compoundInterestParams: CompoundInterestParams = {
+      principal: principal,
+      regularPayIns: regularPayIns,
+      regularPayInPeriod: regularPayInPeriod,
+      duration: duration,
+      interestRate: interestRate
+    }
 
     setCompounds(() => calculationService.getCompoundInterest(compoundInterestParams));
     setContributions(() => calculationService.getTotalContribution(compoundInterestParams));
+
+    localStorage.setItem('compound-interest-calculator', JSON.stringify(compoundInterestParams));
   }, [principal, regularPayIns, duration, interestRate, regularPayInPeriod]);
 
   return (
@@ -53,14 +54,14 @@ const CompoundInterestCalculator = () => {
         <div className='row-group'>
           <div className='input-row'>
             <span className='input-label'>Initial Investment</span>
-            <InputNumber setValue={setPrincipal}/>
+            <InputNumber setValue={setPrincipal} value={principal}/>
             <TextBox />
           </div>
           <div className='input-row'>
             <span className='input-label'>Periodic Contribution</span>
-            <InputNumber setValue={setRegularPayIns}/>
+            <InputNumber setValue={setRegularPayIns} value={regularPayIns}/>
             <DropdownList 
-              currentValue={initialRegularPayInPeriod}
+              currentValue={initialValues.regularPayInPeriod}
               possibleValues={Object.values(RegularPayInPeriod)} 
               setValue={setRegularPayInPeriod} />
           </div>
@@ -69,12 +70,12 @@ const CompoundInterestCalculator = () => {
         <div className='row-group'>
           <div className='input-row'>
             <span className='input-label'>Length of Time</span>
-            <InputNumber setValue={setDuration}/>
+            <InputNumber setValue={setDuration} value={duration}/>
             <TextBox text='Years' />
           </div>
           <div className='input-row'>
             <span className='input-label'>Interest Rate</span>
-            <InputNumber setValue={setInterestRate}/>
+            <InputNumber setValue={setInterestRate} value={interestRate}/>
             <TextBox text='% (AER)' />
           </div>
         </div>
