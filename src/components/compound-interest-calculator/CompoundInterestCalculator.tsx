@@ -80,28 +80,32 @@ const CompoundInterestCalculator = () => {
         </div>
       </div>
 
-      <div className='total-container'>
-        <div className='total-compound total-row'>
-          <div>
-            <strong>Total</strong> after <strong>{duration}</strong> years
+      <div className='total-flex-container'>
+        <div className='total-container'>
+          <div className='total-compound total-row'>
+            <div>
+              <strong>Total</strong> after <strong>{duration}</strong> years
+            </div>
+
+            <div className='currency'>
+              {totalCompound}
+            </div>
           </div>
 
-          <div className='currency'>
-            {totalCompound}
-          </div>
-        </div>
-
-        <div className='total-contribution total-row'>
-          <div>
-            Raw Contributions
-          </div>
-          <div className='currency'>
-            {totalContribution}
+          <div className='total-contribution total-row'>
+            <div>
+              Raw Contributions
+            </div>
+            <div className='currency'>
+              {totalContribution}
+            </div>
           </div>
         </div>
       </div>
 
-      <LineChart y1={compounds} y2={contributions} label1={''} label2={''} />
+      <div className='line-chart-container'>
+        <LineChart y1={compounds} y2={contributions} label1={''} label2={''} />
+      </div>
     </div>
   )
 }

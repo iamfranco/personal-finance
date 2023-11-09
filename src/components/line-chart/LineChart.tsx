@@ -10,8 +10,6 @@ ChartJS.register(
   Tooltip,
 );
 
-// const options = ;
-
 interface Props {
   y1: number[],
   y2: number[],
@@ -48,7 +46,7 @@ const LineChart = ({y1, y2, label1, label2}: Props) => {
   return (
     <Line 
       options={{
-        responsive: true,
+        maintainAspectRatio: false,
         plugins: {
           tooltip: {
             callbacks: {

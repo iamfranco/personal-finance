@@ -3,6 +3,8 @@
 
 $row-group-width: 350px;
 $input-gap: 10px;
+$non-chart-height: 500px;
+$non-chart-height-desktop: 300px;
 
 .compound-interest-container {
   margin: 30px auto;
@@ -18,6 +20,14 @@ $input-gap: 10px;
       }
     }
   }
+
+  .line-chart-container {
+    height: calc(100vh - $non-chart-height);
+
+    @media (min-width: breakpoint.$desktop) {
+      height: calc(100vh - $non-chart-height-desktop);
+    }
+  }
 }
 
 .input-row {
@@ -31,12 +41,18 @@ $input-gap: 10px;
   }
 }
 
-.total-container {
-  margin-top: 40px;
-  margin-bottom: 10px;
-
+.total-flex-container {
   @media (min-width: breakpoint.$desktop) {
-    float: right;
+    display: flex;
+  }
+
+  .total-container {
+    margin-top: 40px;
+    margin-bottom: 10px;
+  
+    @media (min-width: breakpoint.$desktop) {
+      margin-left: auto;
+    }
   }
 }
 
