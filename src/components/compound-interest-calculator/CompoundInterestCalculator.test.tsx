@@ -22,7 +22,7 @@ vi.spyOn(numberDisplayService, 'toCurrencyFormat')
 const getInputByLabel = (label: string) => {
   const inputLabel = screen.getByText(label);
   
-  const input = within(inputLabel.parentElement!).getByRole('textbox');
+  const input = within(inputLabel.parentElement!).getByRole('spinbutton');
   return input;
 }
 

@@ -1,22 +1,59 @@
+@use '../../styles/breakpoint.scss';
+@use '../../styles/boxSize.scss';
+
+$row-group-width: 350px;
+$input-gap: 10px;
+$non-chart-height: 500px;
+$non-chart-height-desktop: 300px;
+
 .compound-interest-container {
-  max-width: 600px;
   margin: 30px auto;
   padding: 0 10px;
+
+  .row-group-container {
+    @media (min-width: breakpoint.$desktop) {
+      display: flex;
+      justify-content: space-between;
+
+      .row-group {
+        width: $row-group-width;
+      }
+    }
+  }
+
+  .line-chart-container {
+    height: calc(100vh - $non-chart-height);
+
+    @media (min-width: breakpoint.$desktop) {
+      height: calc(100vh - $non-chart-height-desktop);
+    }
+  }
 }
 
 .input-row {
   margin-bottom: 10px;
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: $input-gap;
 
   .input-number {
     margin-left: auto;
   }
 }
 
-.total-container {
-  margin-top: 40px;
+.total-flex-container {
+  @media (min-width: breakpoint.$desktop) {
+    display: flex;
+  }
+
+  .total-container {
+    margin-top: 40px;
+    margin-bottom: 10px;
+  
+    @media (min-width: breakpoint.$desktop) {
+      margin-left: auto;
+    }
+  }
 }
 
 .total-row {
@@ -24,9 +61,19 @@
   font-size: 16px;
   margin-bottom: 5px;
 
+  @media (min-width: breakpoint.$desktop) {
+    gap: 40px;
+  }
+
   .currency {
     margin-left: auto;
     font-family: 'Courier Prime', monospace;
+    font-size: 18px;
+    transform: translateY(2px);
+
+    @media (min-width: breakpoint.$desktop) {
+      margin-right: 8px;
+    }
   }
 
   &.total-compound {

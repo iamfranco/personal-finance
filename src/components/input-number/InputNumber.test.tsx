@@ -16,7 +16,7 @@ describe('InputNumber component', () => {
   it('when user types in number, then setValue is called with the number', async () => {
     // Arrange
     render(<InputNumber setValue={mockSetValue} />)
-    const input = screen.getByRole<HTMLInputElement>('textbox');
+    const input = screen.getByRole<HTMLInputElement>('spinbutton');
 
     // Act
     await user.type(input, '12.23');
@@ -26,57 +26,31 @@ describe('InputNumber component', () => {
     expect(mockSetValue).toHaveBeenCalledWith(12);
     expect(mockSetValue).toHaveBeenCalledWith(12.2);
     expect(mockSetValue).toHaveBeenCalledWith(12.23);
-    expect(input.className).not.toContain('error');
   })
 
-  it('when user types in non number, then setValue is never called and input has error class', async () => {
+  it('when user types in number then full backspace, then setValue is called with 0', async () => {
     // Arrange
     render(<InputNumber setValue={mockSetValue} />)
-    const input = screen.getByRole<HTMLInputElement>('textbox');
+    const input = screen.getByRole<HTMLInputElement>('spinbutton');
 
-    // Act
-    await user.type(input, 'abcde');
+    // Act - type in numbers
+    await user.type(input, '12.3');
 
     // Assert
-    expect(mockSetValue).not.toHaveBeenCalled();
-    expect(input.className).toContain('error');
-  })
+    expect(mockSetValue).toHaveBeenCalledWith(1);
+    expect(mockSetValue).toHaveBeenCalledWith(12);
+    expect(mockSetValue).toHaveBeenCalledWith(12.3);
 
-  it('when user types in number then non numbers then backspaces, then setValue is called for the numbers', async () => {
-    // Arrange
-    render(<InputNumber setValue={mockSetValue} />)
-    const input = screen.getByRole<HTMLInputElement>('textbox');
-
-    // Act - type number then letters
-    await user.type(input, '123abc');
-    
-    // Assert
-    expect(input.className).toContain('error');
-    
-    // Arrange - clear mock
     vi.resetAllMocks();
-    
-    // Act - backspaces so only numbers remain
-    for (var i=0; i<3; i++) {
+
+    // Act - full backspace
+    for (var i=0; i<4; i++) {
       await user.type(input, '{backspace}');
     }
 
     // Assert
-    expect(mockSetValue).toHaveBeenCalledWith(123);
-    expect(input.className).not.toContain('error');
-  })
-
-  it('when user types in number then fully backspaces, then setValue is called with 0', async () => {
-    // Arrange
-    render(<InputNumber setValue={mockSetValue} />)
-    const input = screen.getByRole<HTMLInputElement>('textbox');
-
-    // Act
-    await user.type(input, '1');
-    await user.type(input, '{backspace}');
-
-    // Assert
+    expect(mockSetValue).toHaveBeenCalledWith(12);
+    expect(mockSetValue).toHaveBeenCalledWith(1);
     expect(mockSetValue).toHaveBeenCalledWith(0);
-    expect(input.className).not.toContain('error');
   })
 })
