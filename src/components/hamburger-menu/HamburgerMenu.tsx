@@ -3,7 +3,6 @@ import './HamburgerMenu.scss';
 import classNames from 'classnames';
 import { Page } from '../../models/Page';
 import { NavLink } from 'react-router-dom';
-import GitHubIcon from '../../assets/github.svg';
 import { DarkThemeContext } from '../../App';
 
 interface Props {
@@ -55,7 +54,7 @@ const HamburgerMenu = ({pages}: Props) => {
 
           <a href='https://github.com/iamfranco/personal-finance' target='_blank' className='menu-footer-item'>
             Source Code
-            <img src={GitHubIcon} alt="GitHub Icon" id='github-icon'/>
+            <img src={`github.svg`} alt="GitHub Icon" id='github-icon'/>
           </a>
         </div>
 
