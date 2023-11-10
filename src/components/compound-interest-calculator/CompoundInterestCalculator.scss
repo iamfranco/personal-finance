@@ -1,18 +1,21 @@
 @use '../../styles/breakpoint.scss';
 @use '../../styles/boxSize.scss';
+@use '../../styles/colors.scss';
 
 $row-group-width: 350px;
 $input-gap: 10px;
 $non-chart-height: 500px;
-$non-chart-height-tablet: 400px;
+$non-chart-height-tablet: 350px;
 $non-chart-height-desktop: 300px;
+$non-chart-height-desktop-wide: 230px;
 
 .compound-interest-container {
   padding: 0 10px;
-  max-width: 1000px;
   margin: 0 auto;
 
   @media (min-width: breakpoint.$desktop) {
+    padding-left: 30px;
+    padding-right: 25px;
     padding-top: 18px;
   }
 
@@ -25,17 +28,26 @@ $non-chart-height-desktop: 300px;
         width: $row-group-width;
       }
     }
+
+    @media (min-width: breakpoint.$desktop-wide) {
+      justify-content: inherit;
+      gap: 50px;
+    }
   }
 
   .line-chart-container {
     height: calc(100vh - $non-chart-height);
 
+    @media (min-width: breakpoint.$tablet) {
+      height: calc(100vh - $non-chart-height-tablet);
+    }
+
     @media (min-width: breakpoint.$desktop) {
       height: calc(100vh - $non-chart-height-desktop);
     }
 
-    @media (min-width: breakpoint.$tablet) {
-      height: calc(100vh - $non-chart-height-tablet);
+    @media (min-width: breakpoint.$desktop-wide) {
+      height: calc(100vh - $non-chart-height-desktop-wide);
     }
   }
 }
@@ -52,7 +64,7 @@ $non-chart-height-desktop: 300px;
 }
 
 .total-flex-container {
-  @media (min-width: breakpoint.$desktop) {
+  @media (min-width: breakpoint.$tablet) {
     display: flex;
   }
 
@@ -60,8 +72,12 @@ $non-chart-height-desktop: 300px;
     margin-top: 40px;
     margin-bottom: 10px;
   
-    @media (min-width: breakpoint.$desktop) {
+    @media (min-width: breakpoint.$tablet) {
       margin-left: auto;
+    }
+
+    @media (min-width: breakpoint.$desktop-wide) {
+      margin-top: 25px;
     }
   }
 }
@@ -71,7 +87,7 @@ $non-chart-height-desktop: 300px;
   font-size: 16px;
   margin-bottom: 5px;
 
-  @media (min-width: breakpoint.$desktop) {
+  @media (min-width: breakpoint.$tablet) {
     gap: 40px;
   }
 
@@ -81,20 +97,28 @@ $non-chart-height-desktop: 300px;
     font-size: 18px;
     transform: translateY(2px);
 
-    @media (min-width: breakpoint.$desktop) {
+    @media (min-width: breakpoint.$tablet) {
       margin-right: 8px;
     }
   }
 
   &.total-compound {
-    color: #FF9130;
+    color: colors.$chart-primary-color;
 
     .currency {
       font-weight: bold;
     }
+
+    .dark & {
+      color: colors.$chart-primary-color-dark;
+    }
   }
 
   &.total-contribution {
-    color: #1D70B8;
+    color: colors.$chart-secondary-color;
+
+    .dark & {
+      color: colors.$chart-secondary-color-dark;
+    }
   }
 }

@@ -4,6 +4,7 @@ import HamburgerMenu from "./HamburgerMenu";
 import userEvent from "@testing-library/user-event";
 import { Page } from "../../models/Page";
 import { NavLinkProps } from "react-router-dom";
+import { DarkThemeContext } from "../../App";
 
 const pages: Page[] = [
   {
@@ -22,11 +23,17 @@ vi.mock('react-router-dom', () => {
   }
 });
 
+const mockToggleTheme = vi.fn();
+
 describe('HamburgerMenu component', () => {
   const user = userEvent.setup();
 
   beforeEach(() => {
-    render(<HamburgerMenu pages={pages} />);
+    render(
+      <DarkThemeContext.Provider value={{isDarkTheme: true, toggleTheme: mockToggleTheme}}>
+        <HamburgerMenu pages={pages} />
+      </DarkThemeContext.Provider>
+    );
   })
   afterEach(cleanup)
 
@@ -62,5 +69,16 @@ describe('HamburgerMenu component', () => {
     pages.forEach(page => {
       expect(screen.getByText(page.text)).not.toBeNull();
     })
+  })
+
+  it('when user click dark mode, then toggleDarkMode is called', async () => {
+    // Arrange
+    const darkModeToggle = screen.getByTestId('dark-mode-toggle');
+    
+    // Act
+    await user.click(darkModeToggle);
+
+    // Assert
+    expect(mockToggleTheme).toHaveBeenCalled();
   })
 })

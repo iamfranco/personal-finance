@@ -1,11 +1,11 @@
 @use '../../styles/breakpoint.scss';
+@use '../../styles/colors.scss';
 
 $menu-desktop-width: 260px;
 
 #hamburger-menu {
   #hamburger {
     --bar-height: 2px;
-    --bar-color: #000;
     --bar-width-start: 80%;
     --bar-width-end: 100%;
     --transition-duration: 0.2s;
@@ -26,36 +26,48 @@ $menu-desktop-width: 260px;
       content: ' ';
       display: inline-block;
       position: absolute;
-      background: var(--bar-color);
+      background: colors.$burger-menu-line;
       height: var(--bar-height);
       width: var(--bar-width-start);
       top: calc(25% - var(--bar-height)/2);
       left: calc((100% - var(--bar-width-start))/2);
       transition: var(--transition-duration) ease all;
+
+      .dark & {
+        background: colors.$burger-menu-line-dark;
+      }
     }
 
     &::after {
       content: ' ';
       display: inline-block;
       position: absolute;
-      background: var(--bar-color);
+      background: colors.$burger-menu-line;
       height: var(--bar-height);
       width: var(--bar-width-start);
       top: calc(75% - var(--bar-height)/2);
       left: calc((100% - var(--bar-width-start))/2);
       transition: var(--transition-duration) ease all;
+
+      .dark & {
+        background: colors.$burger-menu-line-dark;
+      }
     }
 
     #hamburger-middle-line {
       content: ' ';
       display: inline-block;
       position: absolute;
-      background: var(--bar-color);
+      background: colors.$burger-menu-line;
       height: var(--bar-height);
       width: var(--bar-width-start);
       top: calc(50% - var(--bar-height)/2);
       left: calc((100% - var(--bar-width-start))/2);
       transition: var(--transition-duration) ease all;
+
+      .dark & {
+        background: colors.$burger-menu-line-dark;
+      }
     }
 
     &.active {
@@ -80,22 +92,35 @@ $menu-desktop-width: 260px;
   }
 
   #menu {
-    background-color: white;
+    background-color: colors.$menu-background-popup;
     display: none;
     position: fixed;
     width: 100%;
     font-size: 16px;
     z-index: 3;
 
+    .dark & {
+      background: colors.$menu-background-popup-dark;
+
+      @media (min-width: breakpoint.$desktop) {
+        background: colors.$menu-background-dark;
+      }
+    }
+
     @media (min-width: breakpoint.$desktop) {
-      display: block;
+      display: flex;
+      flex-direction: column;
       width: $menu-desktop-width;
       height: 100vh;
-      background-color: #f6f6f6;
+      background-color: colors.$menu-background;
     }
     
     &.open {
       display: block;
+
+      @media (min-width: breakpoint.$desktop) {
+        display: flex;
+      }
     }
 
     #menu-title {
@@ -113,32 +138,66 @@ $menu-desktop-width: 260px;
       display: block;
 
       &:hover {
-        background-color: #1d70b822;
+        background-color: colors.$menu-item-hover;
+
+        .dark & {
+          background-color: colors.$menu-item-hover-dark;
+        }
       }
 
       &.active {
         font-weight: bold;
-        background-color: #1d70b8;
-        color: white;
+        background-color: colors.$menu-item-active-background;
+        color: colors.$menu-item-active-text;
+
+        .dark & {
+          background-color: colors.$menu-item-active-background-dark;
+          color: colors.$menu-item-active-text-dark;
+        }
       }
     }
 
     #menu-footer {
-      margin-top: 10px;
+      margin-top: 20px;
+
+      @media (min-width: breakpoint.$desktop) {
+        margin-top: auto;
+      }
 
       .menu-footer-item {
         padding: 12px 10px;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        cursor: pointer;
+
+        &:hover {
+          background-color: colors.$menu-item-hover;
+  
+          .dark & {
+            background-color: colors.$menu-item-hover-dark;
+          }
+        }
+
+        #github-icon {
+          height: 25px;
+
+          .dark & {
+            filter: invert(1);
+          }
+        }
       }
     }
   }
 
   #menu-backdrop {
     position: fixed;
-    background-color: rgba(0,0,0,0.7);
+    background-color: colors.$menu-backdrop;
     height: 100vh;
     width: 100%;
     z-index: 1;
     display: none;
+    backdrop-filter: blur(5px);
 
     &.open {
       display: block;
