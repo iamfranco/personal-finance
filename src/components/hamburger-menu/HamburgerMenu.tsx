@@ -1,8 +1,10 @@
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 import './HamburgerMenu.scss';
 import classNames from 'classnames';
 import { Page } from '../../models/Page';
 import { NavLink } from 'react-router-dom';
+import GitHubIcon from '../../assets/github.svg';
+import { DarkThemeContext } from '../../App';
 
 interface Props {
   pages: Page[]
@@ -10,6 +12,8 @@ interface Props {
 
 const HamburgerMenu = ({pages}: Props) => {
   const [isOpen, setIsOpen] = useState(false);
+
+  const {isDarkTheme, toggleTheme} = useContext(DarkThemeContext);
 
   const handleClick = () => {
     setIsOpen(isOpen => !isOpen);
@@ -41,7 +45,18 @@ const HamburgerMenu = ({pages}: Props) => {
         {menuItems}
 
         <div id='menu-footer'>
-          <div className='menu-footer-item'>Source Code</div>
+          <div 
+            data-testid='dark-mode-toggle'
+            className='menu-footer-item' 
+            onClick={() => {toggleTheme(); closeMenu()}}
+          >
+            { isDarkTheme ? 'Light Mode' : 'Dark Mode' }
+          </div>
+
+          <a href='https://github.com/iamfranco/personal-finance' target='_blank' className='menu-footer-item'>
+            Source Code
+            <img src={GitHubIcon} alt="GitHub Icon" id='github-icon'/>
+          </a>
         </div>
 
       </div>

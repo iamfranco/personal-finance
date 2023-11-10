@@ -46,11 +46,36 @@ const CompoundInterestCalculator = () => {
     localStorage.setItem('compound-interest-calculator', JSON.stringify(compoundInterestParams));
   }, [principal, regularPayIns, duration, interestRate, regularPayInPeriod]);
 
+  const totalRows = (
+    <div className='total-flex-container'>
+      <div className='total-container'>
+        <div className='total-compound total-row'>
+          <div>
+            <strong>Total</strong> after <strong>{duration}</strong> years
+          </div>
+          <div className='currency'>
+            {totalCompound}
+          </div>
+        </div>
+
+        <div className='total-contribution total-row'>
+          <div>
+            Raw Contributions
+          </div>
+          <div className='currency'>
+            {totalContribution}
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+
   return (
     <div className='compound-interest-container'>
       <h1>Compound Interest Calculator</h1>
       
       <div className='row-group-container'>
+
         <div className='row-group'>
           <div className='input-row'>
             <span className='input-label'>Initial Investment</span>
@@ -79,29 +104,14 @@ const CompoundInterestCalculator = () => {
             <TextBox text='% (AER)' />
           </div>
         </div>
+
+        <div className='show-for-desktop-wide margin-left-auto'>
+          {totalRows}
+        </div>
       </div>
 
-      <div className='total-flex-container'>
-        <div className='total-container'>
-          <div className='total-compound total-row'>
-            <div>
-              <strong>Total</strong> after <strong>{duration}</strong> years
-            </div>
-
-            <div className='currency'>
-              {totalCompound}
-            </div>
-          </div>
-
-          <div className='total-contribution total-row'>
-            <div>
-              Raw Contributions
-            </div>
-            <div className='currency'>
-              {totalContribution}
-            </div>
-          </div>
-        </div>
+      <div className='show-for-sub-desktop-wide'>
+        {totalRows}
       </div>
 
       <div className='line-chart-container'>

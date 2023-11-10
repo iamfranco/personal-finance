@@ -1,0 +1,37 @@
+$body-background: #fff;
+$body-background-dark: #222;
+
+// hamburger menu
+$menu-background-popup: #fff;
+$menu-background-popup-dark: #333; 
+$menu-background: #f6f6f6;
+$menu-background-dark: #333;
+$menu-item-hover: #1d70b844;
+$menu-item-hover-dark: #ffffff55;
+$menu-item-active-background: #1d70b8;
+$menu-item-active-background-dark: #fff;
+$menu-item-active-text: #fff;
+$menu-item-active-text-dark: #000;
+$burger-menu-line: #000;
+$burger-menu-line-dark: #fff;
+$menu-backdrop: #00000088;
+
+// charts
+:root {
+  --chart-primary-color: #FF9130;
+  --chart-primary-color-dark: #FF9130;
+  --chart-secondary-color: #1D70B8;
+  --chart-secondary-color-dark: #55b0ff;
+  --chart-text-color: #000;
+  --chart-text-color-dark: #fff;
+  --chart-grid-line-color: #0003;
+  --chart-grid-line-color-dark: #fff6;
+}
+$chart-primary-color: var(--chart-primary-color);
+$chart-primary-color-dark: var(--chart-primary-color-dark);
+$chart-secondary-color: var(--chart-secondary-color);
+$chart-secondary-color-dark: var(--chart-secondary-color-dark);
+$chart-text-color: var(--chart-text-color);
+$chart-text-color-dark: var(--chart-text-color-dark);
+$chart-grid-line-color: var(--chart-grid-line-color);
+$chart-grid-line-color-dark: var(--chart-grid-line-color-dark);

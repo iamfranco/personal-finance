@@ -1,12 +1,27 @@
 @use './styles/breakpoint.scss';
 @use './components/hamburger-menu/HamburgerMenu.scss';
 
-$menu-content-gap: 20px;
-
 #app-container {
   #app-content {
     @media (min-width: breakpoint.$desktop) {
-      padding-left: calc(HamburgerMenu.$menu-desktop-width + $menu-content-gap);
+      padding-left: calc(HamburgerMenu.$menu-desktop-width);
     }
   }
+}
+
+.show-for-sub-desktop-wide {
+  @media (min-width: breakpoint.$desktop-wide) {
+    display: none;
+  }
+}
+
+.show-for-desktop-wide {
+  display: none;
+  @media (min-width: breakpoint.$desktop-wide) {
+    display: block;
+  }
+}
+
+.margin-left-auto {
+  margin-left: auto;
 }

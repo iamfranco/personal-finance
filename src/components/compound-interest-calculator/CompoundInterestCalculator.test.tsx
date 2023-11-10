@@ -100,9 +100,9 @@ describe('CompoundInterestCalculator component', () => {
 
     // Assert
     expect(getCompoundInterestSpy).toHaveBeenCalledWith(compoundInterestParams);
-    expect(screen.getByText(compoundTotal)).not.toBeNull();
+    expect(screen.getAllByText(compoundTotal)[0]).not.toBeNull();
 
     expect(getTotalContributionSpy).toHaveBeenCalledWith(compoundInterestParams);
-    expect(screen.getByText(flatTotal)).not.toBeNull();
+    expect(screen.getAllByText(flatTotal)[0]).not.toBeNull();
   })
 })
