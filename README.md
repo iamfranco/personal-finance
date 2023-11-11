@@ -4,6 +4,8 @@ This is a Progressive Web App (PWA) to calculate compound interests.
 
 App Link: https://francochan.co/personal-finance
 
+![Demo Gif](/readme-assets/personal-finance-large.gif)
+
 ### Why am I making this project?
 
 The other day I was using the compound interest calculator from [investor.gov](https://www.investor.gov/financial-tools-calculators/calculators/compound-interest-calculator) like a regular person, but for some reason it was slow to compute, so I inspected source and realised it was doing **server side calculations** 🤔 
