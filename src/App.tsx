@@ -17,10 +17,10 @@ function App() {
       text: 'Compound Interest Calculator',
       link: '/compound-interest-calculator'
     },
-    {
-      text: 'AER to Monthly Interest',
-      link: '/aer-to-monthly-interest'
-    }
+    // {
+    //   text: 'AER to Monthly Interest',
+    //   link: '/aer-to-monthly-interest'
+    // }
   ]
 
   const initialIsDarkTheme = localStorageService.getItem<boolean>('is-dark-mode', false);
